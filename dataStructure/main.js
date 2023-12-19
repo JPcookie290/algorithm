@@ -58,6 +58,8 @@ myList.append(55);
 myList.append(65);
 myList.append(75);
 console.log(myList);
+myList.pop();
+console.log(myList);
 /*
 const head = new ListNode(5);
 head.next = new ListNode(10);

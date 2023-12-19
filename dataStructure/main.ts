@@ -42,7 +42,7 @@ class SinglyLinkedList {
         this.tail!.next = null;
         this.length--;
         return temp;
-        
+
         /*
         let currentItem = this.head;
         while (currentItem) {
@@ -60,6 +60,8 @@ myList.append(35);
 myList.append(55);
 myList.append(65);
 myList.append(75);
+console.log(myList);
+myList.pop();
 console.log(myList);
 
 
