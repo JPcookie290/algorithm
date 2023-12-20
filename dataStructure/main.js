@@ -49,6 +49,43 @@ class SinglyLinkedList {
         */
         //return knoten
     }
+    //remove the first item of the list
+    shift() {
+        if (!this.head)
+            return undefined;
+        const temp = this.head;
+        this.head = temp.next;
+        this.length--;
+        if (this.length === 0)
+            this.tail = null;
+        return temp;
+    }
+    //Add item at the beginning of the list
+    unshift(value) {
+        const newNode = new ListNode(value);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
+    //get a node from specific index
+    get(index) {
+        if (index < 0 || index >= this.length)
+            return undefined;
+        let currentItem = this.head;
+        let counter = 0;
+        while (counter !== index) {
+            currentItem = currentItem === null || currentItem === void 0 ? void 0 : currentItem.next;
+            counter++;
+        }
+        return currentItem;
+    }
 }
 const myList = new SinglyLinkedList();
 myList.append(5);
@@ -59,6 +96,8 @@ myList.append(65);
 myList.append(75);
 console.log(myList);
 myList.pop();
+console.log(myList);
+myList.shift();
 console.log(myList);
 /*
 const head = new ListNode(5);
