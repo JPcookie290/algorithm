@@ -86,6 +86,48 @@ class SinglyLinkedList {
         }
         return currentItem;
     }
+    //change the value of a node item with a specific index
+    set(value, index) {
+        const node = this.get(index);
+        if (node === undefined)
+            return false;
+        node.value = value;
+        return true;
+    }
+    //add node on a specific index
+    insert(value, index) {
+        if (index < 0 || index > this.length)
+            return false;
+        if (index === 0)
+            return !!this.unshift(value);
+        if (index === this.length)
+            return !!this.append(value);
+        const prevNode = this.get(index - 1);
+        const newNode = new ListNode(value);
+        newNode.next = prevNode.next;
+        prevNode.next = newNode;
+        this.length++;
+        return true;
+    }
+    //removes node on specific index
+    remove(index) {
+        var _a, _b;
+        if (index < 0 || index >= this.length)
+            return undefined;
+        if (index === 0)
+            return (_a = this.shift()) === null || _a === void 0 ? void 0 : _a.value;
+        if (index === this.length - 1)
+            return (_b = this.pop()) === null || _b === void 0 ? void 0 : _b.value;
+        const prevNode = this.get(index - 1);
+        const removeNode = prevNode.next;
+        prevNode.next = (removeNode === null || removeNode === void 0 ? void 0 : removeNode.next) || null;
+        this.length--;
+        return removeNode === null || removeNode === void 0 ? void 0 : removeNode.value;
+    }
+    //reverse the list
+    reverse() {
+        return this;
+    }
 }
 const myList = new SinglyLinkedList();
 myList.append(5);
@@ -98,6 +140,8 @@ console.log(myList);
 myList.pop();
 console.log(myList);
 myList.shift();
+console.log(myList);
+myList.set(100, 3);
 console.log(myList);
 /*
 const head = new ListNode(5);

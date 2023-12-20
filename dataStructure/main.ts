@@ -87,6 +87,44 @@ class SinglyLinkedList {
         }
         return currentItem
     }
+
+    //change the value of a node item with a specific index
+    set(value: number, index: number){
+        const node = this.get(index);
+        if(node === undefined) return false;
+        node!.value = value;
+        return true
+    }
+
+    //add node on a specific index
+    insert(value: number, index: number){
+        if(index < 0 || index > this.length) return false;
+        if(index === 0) return !!this.unshift(value);
+        if(index === this.length) return !!this.append(value);
+        const prevNode = this.get(index - 1) as ListNode;
+        const newNode = new ListNode(value);
+        newNode.next = prevNode.next;
+        prevNode.next = newNode;
+        this.length++;
+        return true
+    }
+
+    //removes node on specific index
+    remove(index: number){
+        if(index < 0 || index >= this.length) return undefined;
+        if(index === 0) return this.shift()?.value;
+        if(index === this.length -1 ) return this.pop()?.value;
+        const prevNode = this.get(index - 1) as ListNode;
+        const removeNode = prevNode.next;
+        prevNode.next = removeNode?.next || null;
+        this.length--;
+        return removeNode?.value;
+    }
+
+    //reverse the list
+    reverse(){
+        return this;
+    }
 }
 
 const myList = new SinglyLinkedList();
@@ -101,6 +139,9 @@ myList.pop();
 console.log(myList);
 myList.shift();
 console.log(myList);
+myList.set(100, 3);
+console.log(myList);
+
 
 
 
