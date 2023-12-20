@@ -126,6 +126,19 @@ class SinglyLinkedList {
     }
     //reverse the list
     reverse() {
+        if (this.length === 0)
+            return undefined;
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        let next = null;
+        let prev = null;
+        while (node !== null) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
         return this;
     }
 }
@@ -149,4 +162,4 @@ head.next = new ListNode(10);
 head.next.next = new ListNode(20);
 console.log(head);
 */ 
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=singleLinkedList.js.map

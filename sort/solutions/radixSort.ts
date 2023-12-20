@@ -1,3 +1,4 @@
+/*
 function getDigit(num: number, i: number) {
     return Math.floor((Math.abs(num) / Math.pow(10, i)) % 10);
 }
@@ -15,6 +16,7 @@ Erklärung der Modulo-Rechnung
    400           90           1
 
 */
+/*
 
 function digitCount(num: number) {
     if (num === 0) return 1;
@@ -44,3 +46,4 @@ function radixSort(arr: number[]): number[] {
 
 const data = radixSort([5, 12, 3, 11]);
 console.log(data);
+*/

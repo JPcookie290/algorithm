@@ -123,6 +123,18 @@ class SinglyLinkedList {
 
     //reverse the list
     reverse(){
+        if (this.length === 0) return undefined;
+        let node = this.head as ListNode | null;
+        this.head = this.tail;
+        this.tail = node;
+        let next = null as ListNode | null;
+        let prev = null as ListNode | null;
+        while (node !== null) {
+            next = node!.next;
+            node!.next = prev;
+            prev = node;
+            node = next;
+        }
         return this;
     }
 }

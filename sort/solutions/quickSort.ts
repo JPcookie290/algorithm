@@ -1,3 +1,4 @@
+/*
 function pivot(arr: number[], start: number  = 0, end: number = arr.length -1): number {
     let pivotValue = arr[start];
     let pivotIndex = start;
@@ -20,3 +21,4 @@ function quickSort(arr: number[], left: number = 0, right: number = arr.length -
     }
     return arr;
 }
+*/
