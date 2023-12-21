@@ -19,7 +19,7 @@ function pivot(array: number[], startIndex: number = 0, endIndex: number = array
     return pivotIndex
 }
 
-/* ----- Test radixSort ----- */
+/* ----- Test pivot ----- */
 //console.log(pivot([5, 2, 1, 8, 4, 7, 6, 3]));
 //console.log(pivot([55, 17, 22, 78, 101, 25, 156, 8, 7, 88]));
 

@@ -17,7 +17,7 @@ function pivot(array, startIndex = 0, endIndex = array.length - 1) {
     swapPivot(array, startIndex, pivotIndex);
     return pivotIndex;
 }
-/* ----- Test radixSort ----- */
+/* ----- Test pivot ----- */
 //console.log(pivot([5, 2, 1, 8, 4, 7, 6, 3]));
 //console.log(pivot([55, 17, 22, 78, 101, 25, 156, 8, 7, 88]));
 function quickSort(array, indexLeft = 0, indexRight = array.length - 1) {
