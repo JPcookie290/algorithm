@@ -113,9 +113,42 @@ class Tree {
             if (node.right)
                 check(node.right);
         };
-        let currentNode = this.root;
-        check(currentNode);
+        check(this.root);
         return nodesValues;
+    }
+    //In-Order Methode
+    inOrder() {
+        const nodesValues = [];
+        const check = (node) => {
+            if (node.left)
+                check(node.left);
+            nodesValues.push(node.value);
+            if (node.right)
+                check(node.right);
+        };
+        check(this.root);
+        return nodesValues;
+    }
+    //Post-Order Methode
+    postOrder() {
+        const nodesValues = [];
+        const check = (node) => {
+            if (node.left)
+                check(node.left);
+            if (node.right)
+                check(node.right);
+            nodesValues.push(node.value);
+        };
+        check(this.root);
+        return nodesValues;
+    }
+    //Height Methode
+    height(node) {
+        if (!node)
+            return -1;
+        let leftHeight = this.height(node.left);
+        let rightHeigt = this.height(node.right);
+        return Math.max(leftHeight, rightHeigt) + 1;
     }
 }
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -134,9 +167,12 @@ tree.buildTree(data);
 //tree.insert(12);
 tree.insertRec(12);
 prettyPrint(tree.root);
-//console.log(tree.find(4));
+//console.log(tree.find(5));
 //console.log(tree.find(12));
 //console.log(tree.find(100));
-console.log(tree.breadthFirst());
-console.log(tree.preOrder());
+//console.log("Breadth:", tree.breadthFirst());
+//console.log("Pre-Order:", tree.preOrder());
+//console.log("In-Order:", tree.inOrder());
+//console.log("Post-Order:", tree.postOrder());
+console.log("Height:", tree.height(tree.root));
 //# sourceMappingURL=binaryTree.js.map

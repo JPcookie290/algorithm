@@ -81,7 +81,7 @@ class Tree<T>{
             */
             return search(node.left!) ?? search(node.right!)
         };
-        
+
         return search(this.root!) ?? -1;
     }
 
@@ -106,18 +106,51 @@ class Tree<T>{
     preOrder(){
         const nodesValues: T[] = [];
         const check = (node: TreeNode<T>) => {
-            
             nodesValues.push(node.value);
             if (node.left) check(node.left);
             if (node.right) check(node.right);
         }
         
-        let currentNode = this.root!;
-        check(currentNode);
+        check(this.root!);
 
         return nodesValues;
     }
 
+    //In-Order Methode
+    inOrder(){
+        const nodesValues: T[] = [];
+        const check = (node: TreeNode<T>) => {
+            if (node.left) check(node.left);
+            nodesValues.push(node.value);
+            if (node.right) check(node.right);
+        }
+        
+        check(this.root!);
+
+        return nodesValues;
+    }
+
+    //Post-Order Methode
+    postOrder(){
+        const nodesValues: T[] = [];
+        const check = (node: TreeNode<T>) => {
+            if (node.left) check(node.left);
+            if (node.right) check(node.right);
+            nodesValues.push(node.value);
+        }
+        
+        check(this.root!);
+
+        return nodesValues;
+    }
+
+    //Height Methode
+    height(node: TreeNode<T>){
+        if (!node) return -1;
+        let leftHeight: number = this.height(node.left!);
+        let rightHeigt: number = this.height(node.right!)
+        return Math.max(leftHeight, rightHeigt) + 1;
+    }
 }
 
 const prettyPrint = <T>(node: TreeNode<T>, prefix = "", isLeft = true) => {
@@ -128,8 +161,7 @@ const prettyPrint = <T>(node: TreeNode<T>, prefix = "", isLeft = true) => {
     if (node?.left !== null) {
     prettyPrint(node?.left, `${prefix}${isLeft ? " " : "│ "}`, true);
     }
-    };
-    
+};
 
 //Test
 const data = [5, 10, 21, 87, 301, 350];
@@ -138,10 +170,16 @@ tree.buildTree(data);
 //tree.insert(12);
 tree.insertRec(12);
 prettyPrint(tree.root as TreeNode<number>);
-//console.log(tree.find(4));
+//console.log(tree.find(5));
 //console.log(tree.find(12));
 //console.log(tree.find(100));
-console.log(tree.breadthFirst());
-console.log(tree.preOrder());
+//console.log("Breadth:", tree.breadthFirst());
+//console.log("Pre-Order:", tree.preOrder());
+//console.log("In-Order:", tree.inOrder());
+//console.log("Post-Order:", tree.postOrder());
+console.log("Height:", tree.height(tree.root!));
+
+
+
 
 
