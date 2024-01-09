@@ -42,8 +42,10 @@ airports.forEach(element => {
 graph.addEdge("Berlin", "Wien");
 graph.addEdge("Berlin", "London");
 graph.addEdge("Berlin", "Barcelona");
+graph.addEdge("Wien", "Barcelona");
 console.log(graph.adjacencyList);
-//graph.removeEdge("Berlin", "Wien");
+graph.removeEdge("Berlin", "Wien");
+console.log(graph.adjacencyList);
 graph.removeVertex("London");
 console.log(graph.adjacencyList);
 //# sourceMappingURL=graph.js.map
