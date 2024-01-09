@@ -70,7 +70,7 @@ class Graph<T> {
     }
 
     //Depth First Search Recursive       
-    depthFirstRec(startVertex: T) : T[] {
+    depthFirstRec(startVertex: T): T[] {
         const result: T[] = [];
         const visted: {[key: string]: boolean} = {};
         const dfs = (vertex: T) => {
@@ -85,6 +85,45 @@ class Graph<T> {
         }
         dfs(startVertex);
         return result;
+    }
+
+    //Breadth First Interative
+    breadthFirst(startVertex: T): T[] {
+        const queue = [startVertex];
+        const result: T[] = [];
+        const visted: { [key: string]: boolean} = {};
+        let currentVertex: T | null = null;
+        visted[startVertex as string] = true;
+        while(queue.length){
+            currentVertex = queue.shift() as T;
+            result.push(currentVertex);
+            this.adjacencyList.get(currentVertex)?.forEach(neigbour => {
+                if (!visted[neigbour as string]) {
+                    visted[neigbour as string] = true;
+                    queue.push(neigbour);
+                }
+            })
+        }
+        return result
+    }
+
+    //Breadth First Recursive
+    breadthFirstRec(startVertex: T): T[] {
+        const queue = [startVertex];
+        const visited: T[] = [];
+        let currentVertex: T | null = null;
+        const bfs = () => {
+            currentVertex = queue.shift() as T;
+            visited.push(currentVertex);
+            this.adjacencyList.get(currentVertex)?.slice()?.reverse()?.forEach(node => {
+                if (!visited.includes(node) && !queue.includes(node)) {
+                    queue.push(node);
+                }
+            });
+            if (queue.length) bfs();               
+        }
+        bfs();
+        return visited;
     }
 }
 
@@ -117,9 +156,10 @@ graphLetters.addEdge("C", "E");
 graphLetters.addEdge("E", "D");
 graphLetters.addEdge("E", "F");
 graphLetters.addEdge("F", "D");
-console.log(graphLetters.depthFirst("A"));
-console.log(graphLetters.depthFirstRec("A"));
-
+console.log(graphLetters.depthFirst("A"));          // => ["A", "C", "E", "F", "D", "B"]
+console.log(graphLetters.depthFirstRec("A"));       // => ["A", "B", "D", "E", "C", "F"]
+console.log(graphLetters.breadthFirst("A"));        // => ["A", "B", "C", "D", "E", "F"]
+console.log(graphLetters.breadthFirstRec("A"));     // => ["A", "C", "B", "E", "D", "F"]
 
 
 

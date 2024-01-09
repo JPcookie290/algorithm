@@ -78,6 +78,46 @@ class Graph {
         dfs(startVertex);
         return result;
     }
+    //Breadth First Interative
+    breadthFirst(startVertex) {
+        var _a;
+        const queue = [startVertex];
+        const result = [];
+        const visted = {};
+        let currentVertex = null;
+        visted[startVertex] = true;
+        while (queue.length) {
+            currentVertex = queue.shift();
+            result.push(currentVertex);
+            (_a = this.adjacencyList.get(currentVertex)) === null || _a === void 0 ? void 0 : _a.forEach(neigbour => {
+                if (!visted[neigbour]) {
+                    visted[neigbour] = true;
+                    queue.push(neigbour);
+                }
+            });
+        }
+        return result;
+    }
+    //Breadth First Recursive
+    breadthFirstRec(startVertex) {
+        const queue = [startVertex];
+        const visited = [];
+        let currentVertex = null;
+        const bfs = () => {
+            var _a, _b, _c;
+            currentVertex = queue.shift();
+            visited.push(currentVertex);
+            (_c = (_b = (_a = this.adjacencyList.get(currentVertex)) === null || _a === void 0 ? void 0 : _a.slice()) === null || _b === void 0 ? void 0 : _b.reverse()) === null || _c === void 0 ? void 0 : _c.forEach(node => {
+                if (!visited.includes(node) && !queue.includes(node)) {
+                    queue.push(node);
+                }
+            });
+            if (queue.length)
+                bfs();
+        };
+        bfs();
+        return visited;
+    }
 }
 /* ----------- Testing ----------- */
 /*
@@ -108,6 +148,8 @@ graphLetters.addEdge("C", "E");
 graphLetters.addEdge("E", "D");
 graphLetters.addEdge("E", "F");
 graphLetters.addEdge("F", "D");
-console.log(graphLetters.depthFirst("A"));
-console.log(graphLetters.depthFirstRec("A"));
+console.log(graphLetters.depthFirst("A")); // => ["A", "C", "E", "F", "D", "B"]
+console.log(graphLetters.depthFirstRec("A")); // => ["A", "B", "D", "E", "C", "F"]
+console.log(graphLetters.breadthFirst("A")); // => ["A", "B", "C", "D", "E", "F"]
+console.log(graphLetters.breadthFirstRec("A")); // => ["A", "C", "B", "E", "D", "F"]
 //# sourceMappingURL=graph.js.map
