@@ -1,16 +1,17 @@
 "use strict";
 class ListNodeDouble {
+    value;
+    next = null;
+    prev = null;
     constructor(value) {
-        this.next = null;
-        this.prev = null;
         this.value = value;
     }
 }
 class DoublyLinkedList {
+    head = null;
+    tail = null;
+    length = 0;
     constructor() {
-        this.head = null;
-        this.tail = null;
-        this.length = 0;
     }
 }
 const myListDouble = new DoublyLinkedList();

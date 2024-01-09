@@ -1,15 +1,14 @@
 "use strict";
 class TreeNode {
+    value;
+    left = null;
+    right = null;
     constructor(val) {
-        this.left = null;
-        this.right = null;
         this.value = val;
     }
 }
 class Tree {
-    constructor() {
-        this.root = null;
-    }
+    root = null;
     //build a tree only with numbers
     buildTree(data, start = 0, end = data.length - 1) {
         if (start > end)
@@ -51,26 +50,22 @@ class Tree {
     }
     //Insert Methode recusive
     insertRec(val) {
-        var _a;
         const check = (node) => {
-            var _a, _b;
             if (node.value === val)
                 return;
             if (node.value > val) {
                 //left hand side is a assignment
-                check((node.left = (_a = node.left) !== null && _a !== void 0 ? _a : new TreeNode(val)));
+                check((node.left = node.left ?? new TreeNode(val)));
             }
             if (node.value < val) {
-                check((node.right = (_b = node.right) !== null && _b !== void 0 ? _b : new TreeNode(val)));
+                check((node.right = node.right ?? new TreeNode(val)));
             }
         };
-        check((this.root = (_a = this.root) !== null && _a !== void 0 ? _a : new TreeNode(val)));
+        check((this.root = this.root ?? new TreeNode(val)));
     }
     //Find Methode
     find(val) {
-        var _a;
         const search = (node) => {
-            var _a;
             if (node === null)
                 return null;
             if (node.value === val)
@@ -83,9 +78,9 @@ class Tree {
                 search(node.right)
             }
             */
-            return (_a = search(node.left)) !== null && _a !== void 0 ? _a : search(node.right);
+            return search(node.left) ?? search(node.right);
         };
-        return (_a = search(this.root)) !== null && _a !== void 0 ? _a : -1;
+        return search(this.root) ?? -1;
     }
     //Breadth First Search Methode
     breadthFirst() {
@@ -152,12 +147,12 @@ class Tree {
     }
 }
 const prettyPrint = (node, prefix = "", isLeft = true) => {
-    if ((node === null || node === void 0 ? void 0 : node.right) !== null) {
-        prettyPrint(node === null || node === void 0 ? void 0 : node.right, `${prefix}${isLeft ? "│ " : " "}`, false);
+    if (node?.right !== null) {
+        prettyPrint(node?.right, `${prefix}${isLeft ? "│ " : " "}`, false);
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
-    if ((node === null || node === void 0 ? void 0 : node.left) !== null) {
-        prettyPrint(node === null || node === void 0 ? void 0 : node.left, `${prefix}${isLeft ? " " : "│ "}`, true);
+    if (node?.left !== null) {
+        prettyPrint(node?.left, `${prefix}${isLeft ? " " : "│ "}`, true);
     }
 };
 //Test

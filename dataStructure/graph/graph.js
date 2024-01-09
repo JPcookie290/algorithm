@@ -8,9 +8,7 @@ console.log(adjacencyList);
 console.log(adjacencyList.get("A"));
 */
 class Graph {
-    constructor() {
-        this.adjacencyList = new Map();
-    }
+    adjacencyList = new Map();
     addVertex(vertex) {
         this.adjacencyList.set(vertex, []);
     }
@@ -41,7 +39,6 @@ class Graph {
     }
     //Depth First Search Interative
     depthFirst(startVertex) {
-        var _a;
         const stack = [startVertex]; //push, pop
         const result = [];
         const visted = {};
@@ -50,7 +47,7 @@ class Graph {
         while (stack.length) {
             currentVertex = stack.pop();
             result.push(currentVertex);
-            (_a = this.adjacencyList.get(currentVertex)) === null || _a === void 0 ? void 0 : _a.forEach(neigbour => {
+            this.adjacencyList.get(currentVertex)?.forEach(neigbour => {
                 if (!visted[neigbour]) {
                     visted[neigbour] = true;
                     stack.push(neigbour);
@@ -64,12 +61,11 @@ class Graph {
         const result = [];
         const visted = {};
         const dfs = (vertex) => {
-            var _a;
             if (!vertex)
                 return null;
             visted[vertex] = true;
             result.push(vertex);
-            (_a = this.adjacencyList.get(vertex)) === null || _a === void 0 ? void 0 : _a.forEach(neigbour => {
+            this.adjacencyList.get(vertex)?.forEach(neigbour => {
                 if (!visted[neigbour]) {
                     dfs(neigbour);
                 }
@@ -80,7 +76,6 @@ class Graph {
     }
     //Breadth First Interative
     breadthFirst(startVertex) {
-        var _a;
         const queue = [startVertex];
         const result = [];
         const visted = {};
@@ -89,7 +84,7 @@ class Graph {
         while (queue.length) {
             currentVertex = queue.shift();
             result.push(currentVertex);
-            (_a = this.adjacencyList.get(currentVertex)) === null || _a === void 0 ? void 0 : _a.forEach(neigbour => {
+            this.adjacencyList.get(currentVertex)?.forEach(neigbour => {
                 if (!visted[neigbour]) {
                     visted[neigbour] = true;
                     queue.push(neigbour);
@@ -104,10 +99,9 @@ class Graph {
         const visited = [];
         let currentVertex = null;
         const bfs = () => {
-            var _a, _b, _c;
             currentVertex = queue.shift();
             visited.push(currentVertex);
-            (_c = (_b = (_a = this.adjacencyList.get(currentVertex)) === null || _a === void 0 ? void 0 : _a.slice()) === null || _b === void 0 ? void 0 : _b.reverse()) === null || _c === void 0 ? void 0 : _c.forEach(node => {
+            this.adjacencyList.get(currentVertex)?.slice()?.reverse()?.forEach(node => {
                 if (!visited.includes(node) && !queue.includes(node)) {
                     queue.push(node);
                 }

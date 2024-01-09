@@ -1,16 +1,16 @@
 "use strict";
 class ListNode {
+    value;
+    next;
     constructor(value) {
         this.value = value;
         this.next = null;
     }
 }
 class SinglyLinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = null;
-        this.length = 0;
-    }
+    head = null;
+    tail = null;
+    length = 0;
     //Add Item at the end of the list
     append(value) {
         const newNode = new ListNode(value);
@@ -81,7 +81,7 @@ class SinglyLinkedList {
         let currentItem = this.head;
         let counter = 0;
         while (counter !== index) {
-            currentItem = currentItem === null || currentItem === void 0 ? void 0 : currentItem.next;
+            currentItem = currentItem?.next;
             counter++;
         }
         return currentItem;
@@ -111,18 +111,17 @@ class SinglyLinkedList {
     }
     //removes node on specific index
     remove(index) {
-        var _a, _b;
         if (index < 0 || index >= this.length)
             return undefined;
         if (index === 0)
-            return (_a = this.shift()) === null || _a === void 0 ? void 0 : _a.value;
+            return this.shift()?.value;
         if (index === this.length - 1)
-            return (_b = this.pop()) === null || _b === void 0 ? void 0 : _b.value;
+            return this.pop()?.value;
         const prevNode = this.get(index - 1);
         const removeNode = prevNode.next;
-        prevNode.next = (removeNode === null || removeNode === void 0 ? void 0 : removeNode.next) || null;
+        prevNode.next = removeNode?.next || null;
         this.length--;
-        return removeNode === null || removeNode === void 0 ? void 0 : removeNode.value;
+        return removeNode?.value;
     }
     //reverse the list
     reverse() {
