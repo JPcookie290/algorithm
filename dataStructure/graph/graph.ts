@@ -6,6 +6,7 @@ adjacencyList.set("C", ["B", "D"]);
 console.log(adjacencyList);
 console.log(adjacencyList.get("A"));
 */
+
 type AdjacencyList<T> = Map<T, T[]>;
 
 class Graph<T> {
@@ -46,21 +47,49 @@ class Graph<T> {
         //}
     }
 
+    //Depth First Search Interative
     depthFirst(startVertex: T): T[]{
-        //wenn iterativ
         const stack = [startVertex]; //push, pop
         const result: T[] = [];
         const visted: {[key: string]: boolean} = {};
+        let currentVertex: T | null = null;
         visted[startVertex as string] = true;
-        visted.Berlin
-        //do something
-        while(stack.length) {}        
 
+        while(stack.length) {
+            currentVertex = stack.pop() as T;
+            result.push(currentVertex);
+            this.adjacencyList.get(currentVertex)?.forEach(neigbour => {
+                if (!visted[neigbour as string]) {
+                    visted[neigbour as string] = true;
+                    stack.push(neigbour);
+                }
+            })
+        }
+        
         return result
+    }
+
+    //Depth First Search Recursive       
+    depthFirstRec(startVertex: T) : T[] {
+        const result: T[] = [];
+        const visted: {[key: string]: boolean} = {};
+        const dfs = (vertex: T) => {
+            if (!vertex) return null;
+            visted[vertex as string] = true;
+            result.push(vertex);
+            this.adjacencyList.get(vertex)?.forEach(neigbour => {
+                if (!visted[neigbour as string]) {
+                    dfs(neigbour);
+                }
+            });
+        }
+        dfs(startVertex);
+        return result;
     }
 }
 
-//Test
+/* ----------- Testing ----------- */
+/*
 const graph = new Graph<string>();
 const airports = ["Berlin", "Wien", "London", "Barcelona"]
 airports.forEach(element => {
@@ -70,11 +99,30 @@ graph.addEdge("Berlin", "Wien");
 graph.addEdge("Berlin", "London");
 graph.addEdge("Berlin", "Barcelona");
 graph.addEdge("Wien", "Barcelona");
-//console.log(graph.adjacencyList);
-//graph.removeEdge("Berlin", "Wien");
-//console.log(graph.adjacencyList);
-//graph.removeVertex("London");
 console.log(graph.adjacencyList);
+graph.removeEdge("Berlin", "Wien");
+console.log(graph.adjacencyList);
+graph.removeVertex("London");
+console.log(graph.adjacencyList);
+*/
+const graphLetters = new Graph<string>();
+const letters = ["A", "B", "C", "D", "E", "F"]
+letters.forEach(letter => {
+    graphLetters.addVertex(letter);
+});
+graphLetters.addEdge("A", "B");
+graphLetters.addEdge("A", "C");
+graphLetters.addEdge("B", "D");
+graphLetters.addEdge("C", "E");
+graphLetters.addEdge("E", "D");
+graphLetters.addEdge("E", "F");
+graphLetters.addEdge("F", "D");
+console.log(graphLetters.depthFirst("A"));
+console.log(graphLetters.depthFirstRec("A"));
+
+
+
+
 
 
 
