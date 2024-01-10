@@ -1,5 +1,5 @@
 /*
-First Instance      |    Following Instances
+First Instance      |    Following Instances Example
 Distances:          |    Distance:
 A: 0                |    A: 0
 B: Infinity         |    B: 5
